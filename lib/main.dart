@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'package:flutter_cupertino_localizations/flutter_cupertino_localizations.dart';
 
+import './tale_home_page.dart';
+
 void main() => runApp(TaleApp());
 
 class TaleApp extends StatefulWidget {
@@ -45,7 +47,7 @@ class _TaleAppState extends State<TaleApp> {
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: Center(child: Text(currentLocale.toString())),
+      home: TaleHomePage(),
     );
   }
 }
