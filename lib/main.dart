@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'package:flutter_cupertino_localizations/flutter_cupertino_localizations.dart';
 
 import './tale_home_page.dart';
+import './tale_localizations.dart';
 
 void main() => runApp(TaleApp());
 
@@ -51,6 +52,7 @@ class _TaleAppState extends State<TaleApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+        TaleLocalizations.delegate,
       ],
       home: TaleHomePage(onLocaleChange: onLocaleChange,),
     );

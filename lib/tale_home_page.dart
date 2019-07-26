@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './tale_localizations.dart';
+
 class TaleHomePage extends StatefulWidget {
   TaleHomePage({Key key, this.onLocaleChange}) : super(key: key);
 
@@ -44,7 +46,7 @@ class _TaleHomePageState extends State<TaleHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🌍(${Localizations.localeOf(context).toString()}):'),
+        title: Text('🌍  ${Localizations.of<TaleLocalizations>(context, TaleLocalizations).title}  ::::'),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.translate),
@@ -64,6 +66,7 @@ class _TaleHomePageState extends State<TaleHomePage>
           indicatorColor: Theme.of(context).primaryColor,
           unselectedLabelColor: Colors.white60,
           unselectedLabelStyle: TextStyle(fontSize: 11),
+          labelColor: Colors.black87,
         ),
       ),
       body: TabBarView(
