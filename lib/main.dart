@@ -14,7 +14,8 @@ class TaleApp extends StatefulWidget {
 class _TaleAppState extends State<TaleApp> {
   Locale currentLocale;
 
-  Future onLocaleChange(Locale newLocale) async {
+  void onLocaleChange(Locale newLocale){
+
     setState(() {
       currentLocale = newLocale;
     });
@@ -39,15 +40,18 @@ class _TaleAppState extends State<TaleApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Localisation Tale',
-      theme: ThemeData(),
-      //locale: currentLocale,
+      theme: ThemeData(
+        primaryColor: Color.fromRGBO(9, 183, 211, 1),
+      ),
+      locale: currentLocale,
       supportedLocales: [Locale('en'), Locale('ar')],
       localeResolutionCallback: hundleLocaleCallback,
       localizationsDelegates: [
+        GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: TaleHomePage(),
+      home: TaleHomePage(onLocaleChange: onLocaleChange,),
     );
   }
 }
