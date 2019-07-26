@@ -42,6 +42,7 @@ class _TaleAppState extends State<TaleApp> {
       title: 'Flutter Localisation Tale',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(9, 183, 211, 1),
+        accentColor: Color.fromRGBO(229, 229, 229, 1),
       ),
       locale: currentLocale,
       supportedLocales: [Locale('en'), Locale('ar')],

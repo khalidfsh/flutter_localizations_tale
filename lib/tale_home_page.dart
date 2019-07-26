@@ -45,6 +45,7 @@ class _TaleHomePageState extends State<TaleHomePage>
     return Scaffold(
       appBar: AppBar(
         title: Text('🌍(${Localizations.localeOf(context).toString()}):'),
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.translate),
           onPressed: () {
@@ -55,13 +56,23 @@ class _TaleHomePageState extends State<TaleHomePage>
           tabs: _tabs,
           controller: _tabController,
           isScrollable: true,
+          indicator: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            color: Color.fromRGBO(229, 229, 229, 1),
+          ),
+          indicatorColor: Theme.of(context).primaryColor,
+          unselectedLabelColor: Colors.white60,
+          unselectedLabelStyle: TextStyle(fontSize: 11),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: _tabs
             .map(
-              (tab) => Center(child: tab),
+              (tab) => Container(
+                  color: Theme.of(context).accentColor,
+                  child: Center(child: tab)),
             )
             .toList(),
       ),
