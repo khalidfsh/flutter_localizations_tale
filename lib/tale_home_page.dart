@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './tale_localizations.dart';
+import './TabViewPages/all_pages.dart';
 
 class TaleHomePage extends StatefulWidget {
   TaleHomePage({Key key, this.onLocaleChange}) : super(key: key);
@@ -71,13 +72,7 @@ class _TaleHomePageState extends State<TaleHomePage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: _tabs
-            .map(
-              (tab) => Container(
-                  color: Theme.of(context).accentColor,
-                  child: Center(child: tab)),
-            )
-            .toList(),
+        children: [WidgetLocalizationsPage(), MaterialLocalizationsPage(), CupertinoLocalizationsPage()],
       ),
     );
   }
