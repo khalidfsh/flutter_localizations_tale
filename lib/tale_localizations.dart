@@ -7,40 +7,36 @@ class TaleLocalizations {
 
   final Locale locale;
 
-  TaleLocalizations of(BuildContext context) =>
+  static TaleLocalizations of(BuildContext context) =>
       Localizations.of<TaleLocalizations>(context, TaleLocalizations);
 
   static const List<Map<String, String>> supportedLanguageInfos = const [
     {"language": "العربية", "languageCode": "ar"},
     {"language": "English", "languageCode": "en"},
+    {"language": "English", "languageCode": "he"},
+    {"language": "English", "languageCode": "es"},
   ];
 
   static const Map<String, Map<String, String>> _loclizesValues = {
     "ar": {
       "title": 'آهلاً بالعالم',
-      "switchLanguage": 'تغيير اللغة',
-      "lable": 'عنوان',
-      "info": 'معلومة',
-      "dateTime": 'تاريخ و وقت',
-      "tapHint": 'تلميحة',
     },
     "en": {
       "title": "Hello World",
-      "switchLanguage": 'Switch Language',
-      "lable": 'Lable',
-      "info": 'Info',
-      "dateTime": 'Date&Time',
-      "tapHint": 'TapHint',
+    },
+    "he": {
+      "title": "Hello World",
+    },
+    "es": {
+      "title": "Hello World",
     }
   };
 
   String get title => _loclizesValues[locale.languageCode]['title'];
-  String get switchLanguage =>
-      _loclizesValues[locale.languageCode]['switchLanguage'];
-  String get lable => _loclizesValues[locale.languageCode]['lable'];
-  String get info => _loclizesValues[locale.languageCode]['info'];
-  String get dateTime => _loclizesValues[locale.languageCode]['dateTime'];
-  String get tapHint => _loclizesValues[locale.languageCode]['tapHint'];
+
+  String get language => supportedLanguageInfos.singleWhere((t) => t['languageCode'] == locale.languageCode)['language'];
+
+
 
   static const LocalizationsDelegate<TaleLocalizations> delegate =
       _TaleLocalizationsDelegate();

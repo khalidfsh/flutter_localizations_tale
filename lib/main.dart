@@ -15,25 +15,30 @@ class TaleApp extends StatefulWidget {
 class _TaleAppState extends State<TaleApp> {
   Locale currentLocale;
 
-  void onLocaleChange(Locale newLocale){
-
-    setState(() {
-      currentLocale = newLocale;
-    });
+  void onLocaleChange(Locale newLocale) {
+      setState(() {
+        currentLocale = newLocale;
+      });
+    print('onLocaleChange: New Locale: $currentLocale');
   }
 
   Locale hundleLocaleCallback(
-      Locale deviceLocale, Iterable<Locale> appSupportedLocales) {
-    print('Device Locale: ' + deviceLocale.toString());
-    print('Tale App Supported Locales: ' + appSupportedLocales.toString());
+      List<Locale> deviceLocale, Iterable<Locale> appSupportedLocales) {
+    print('hundleLocaleCallback: Device Locale: $deviceLocale');
+    print('hundleLocaleCallback: App Supported Locales: $appSupportedLocales');
 
     currentLocale = appSupportedLocales.firstWhere(
-      (locale) => deviceLocale.languageCode == locale.languageCode,
+      (locale) => deviceLocale[0].languageCode == locale.languageCode,
       orElse: () => Locale(
         appSupportedLocales.first.languageCode,
-        deviceLocale.countryCode,
+        deviceLocale[0].countryCode,
       ),
     );
+
+    currentLocale =
+        Locale(currentLocale.languageCode, deviceLocale[0].countryCode);
+
+    print('hundleLocaleCallback: New Locale: $currentLocale');
     return currentLocale;
   }
 
@@ -46,15 +51,20 @@ class _TaleAppState extends State<TaleApp> {
         accentColor: Color.fromRGBO(229, 229, 229, 1),
       ),
       locale: currentLocale,
-      supportedLocales: [Locale('en'), Locale('ar')],
-      localeResolutionCallback: hundleLocaleCallback,
+      supportedLocales: supportedLocalesList,
+      localeListResolutionCallback: hundleLocaleCallback,
       localizationsDelegates: [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         TaleLocalizations.delegate,
       ],
-      home: TaleHomePage(onLocaleChange: onLocaleChange,),
+      home: TaleHomePage(
+        onLocaleChange: onLocaleChange,
+      ),
     );
   }
+
+  List<Locale> supportedLocalesList = TaleLocalizations.supportedLanguageInfos
+      .map((localeInfo) => Locale(localeInfo['languageCode'])).toList();
 }

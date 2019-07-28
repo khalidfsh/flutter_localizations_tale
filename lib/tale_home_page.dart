@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import './tale_localizations.dart';
@@ -20,6 +22,8 @@ class _TaleHomePageState extends State<TaleHomePage>
 
   TabController _tabController;
 
+  Random _languageRandomGenerator;
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +31,8 @@ class _TaleHomePageState extends State<TaleHomePage>
       length: _tabs.length,
       vsync: this,
     );
+
+    _languageRandomGenerator = Random();
   }
 
   @override
@@ -36,21 +42,41 @@ class _TaleHomePageState extends State<TaleHomePage>
   }
 
   void switchLanguage(BuildContext context) {
-    if (Localizations.localeOf(context).languageCode == 'en') {
-      widget.onLocaleChange(Locale('ar'));
-    } else {
-      widget.onLocaleChange(Locale('en'));
-    }
+    int langaugeIndex = _languageRandomGenerator.nextInt(3);
+    List<Locale> localesList = TaleLocalizations.supportedLanguageInfos
+        .map((localeInfo) => Locale(localeInfo['languageCode'])).toList();
+    print(localesList);
+
+    widget.onLocaleChange(localesList[langaugeIndex]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('🌍  ${Localizations.of<TaleLocalizations>(context, TaleLocalizations).title}  ::::'),
+        title: Text(
+          '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).title}   🌍',
+          style: TextStyle(color: Theme.of(context).accentColor),
+        ),
+        centerTitle: false,
+        actions: <Widget>[
+          Padding(
+            padding: (WidgetsLocalizations.of(context).textDirection ==
+                    TextDirection.ltr)
+                ? EdgeInsets.only(right: 15)
+                : EdgeInsets.only(left: 15),
+            child: Text(
+              '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).language}',
+              style: TextStyle(color: Colors.white30),
+            ),
+          ),
+        ],
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.translate),
+          icon: Icon(
+            Icons.translate,
+            color: Theme.of(context).accentColor,
+          ),
           onPressed: () {
             switchLanguage(context);
           },
@@ -72,7 +98,11 @@ class _TaleHomePageState extends State<TaleHomePage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [WidgetLocalizationsPage(), MaterialLocalizationsPage(), CupertinoLocalizationsPage()],
+        children: [
+          WidgetLocalizationsPage(),
+          MaterialLocalizationsPage(),
+          CupertinoLocalizationsPage()
+        ],
       ),
     );
   }
