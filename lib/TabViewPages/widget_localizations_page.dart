@@ -15,18 +15,9 @@ class WidgetLocalizationsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            '''WidgetLocalizations maps [locale] to [textDirection].
-All localesare [TextDirection.ltr] (Left to Right) except for locales with the following [Locale.languageCode] values, which are [TextDirection.rtl]:
-  * ar - Arabic
-  * fa - Farsi
-  * he - Hebrew
-  * ps - Pashto
-  * sd - Sindhi
-  
-  Current Text Dirctions ${WidgetsLocalizations.of(context).textDirection}.
-  
-  Next row card should be start from''',
+            textMessage(context),
             textDirection: TextDirection.ltr,
+            style: TextStyle(fontSize: 14),
           ),
           FlatRoundedCard(
             child: Row(
@@ -35,6 +26,11 @@ All localesare [TextDirection.ltr] (Left to Right) except for locales with the f
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                Icon(
+                  (Directionality.of(context) == TextDirection.ltr)
+                      ? Icons.format_textdirection_l_to_r
+                      : Icons.format_textdirection_r_to_l,
+                ),
                 for (num i = 1; i <= 5; i++)
                   Padding(
                     padding: EdgeInsets.all(15),
@@ -46,5 +42,19 @@ All localesare [TextDirection.ltr] (Left to Right) except for locales with the f
         ],
       ),
     );
+  }
+
+  String textMessage(BuildContext context) {
+    return '''WidgetLocalizations maps [locale] to [textDirection].
+All localesare [TextDirection.ltr] (Left to Right) except for locales with the following [Locale.languageCode] values, which are [TextDirection.rtl]:
+  - ar - Arabic
+  - fa - Farsi
+  - he - Hebrew
+  - ps - Pashto
+  - sd - Sindhi
+  
+  Current Text Dirctions: ${WidgetsLocalizations.of(context).textDirection}.
+  
+Next row card should be start accurding to [textDirection] type''';
   }
 }
