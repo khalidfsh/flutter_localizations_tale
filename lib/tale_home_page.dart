@@ -42,9 +42,11 @@ class _TaleHomePageState extends State<TaleHomePage>
   }
 
   void switchLanguage(BuildContext context) {
-    int langaugeIndex = _languageRandomGenerator.nextInt(3);
-    List<Locale> localesList = TaleLocalizations.supportedLanguageInfos
-        .map((localeInfo) => Locale(localeInfo['languageCode'])).toList();
+    int langaugeIndex = _languageRandomGenerator
+        .nextInt(kAppSupportedLanguageInfos.length);
+    List<Locale> localesList = kAppSupportedLanguageInfos
+        .map((localeInfo) => Locale(localeInfo['languageCode']))
+        .toList();
     print(localesList);
 
     widget.onLocaleChange(localesList[langaugeIndex]);

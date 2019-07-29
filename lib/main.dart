@@ -65,6 +65,6 @@ class _TaleAppState extends State<TaleApp> {
     );
   }
 
-  List<Locale> supportedLocalesList = TaleLocalizations.supportedLanguageInfos
+  List<Locale> supportedLocalesList = kAppSupportedLanguageInfos
       .map((localeInfo) => Locale(localeInfo['languageCode'])).toList();
 }
