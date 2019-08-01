@@ -17,7 +17,6 @@ class WidgetLocalizationsPage extends StatelessWidget {
           Text(
             textMessage(context),
             textDirection: TextDirection.ltr,
-            style: TextStyle(fontSize: 14),
           ),
           FlatRoundedCard(
             child: Row(
@@ -31,7 +30,7 @@ class WidgetLocalizationsPage extends StatelessWidget {
                       ? Icons.format_textdirection_l_to_r
                       : Icons.format_textdirection_r_to_l,
                 ),
-                for (num i = 1; i <= 5; i++)
+                for (num i = 1; i <= 3; i++)
                   Padding(
                     padding: EdgeInsets.all(15),
                     child: Text(i.toString(), style: TextStyle(fontSize: 20)),
@@ -39,6 +38,19 @@ class WidgetLocalizationsPage extends StatelessWidget {
               ],
             ),
           ),
+          FlatButton(textColor: Theme.of(context).primaryColor,
+            child: Text('Tap to try Navigator.push'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => Scaffold(
+                    appBar: AppBar(),
+                  ),
+                ),
+              );
+            },
+          )
         ],
       ),
     );
