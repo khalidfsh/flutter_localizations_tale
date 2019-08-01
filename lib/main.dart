@@ -15,10 +15,10 @@ class TaleApp extends StatefulWidget {
 class _TaleAppState extends State<TaleApp> {
   Locale currentLocale;
 
-  void onLocaleChange(Locale newLocale) {
-      setState(() {
-        currentLocale = newLocale;
-      });
+  void updateLocale(Locale newLocale) {
+    setState(() {
+      currentLocale = newLocale;
+    });
     print('onLocaleChange: New Locale: $currentLocale');
   }
 
@@ -27,16 +27,18 @@ class _TaleAppState extends State<TaleApp> {
     print('hundleLocaleCallback: Device Locale: $deviceLocale');
     print('hundleLocaleCallback: App Supported Locales: $appSupportedLocales');
 
-    currentLocale = appSupportedLocales.firstWhere(
-      (locale) => deviceLocale[0].languageCode == locale.languageCode,
-      orElse: () => Locale(
-        appSupportedLocales.first.languageCode,
-        deviceLocale[0].countryCode,
-      ),
-    );
+    currentLocale = (currentLocale == null)? appSupportedLocales.firstWhere(
+      (locale) => locale.languageCode == locale.languageCode,
+      orElse: () => Locale(appSupportedLocales.first.languageCode),
+    ) : currentLocale;
 
-    currentLocale =
-        Locale(currentLocale.languageCode, deviceLocale[0].countryCode);
+    @override
+    void initState() { 
+      super.initState();
+      //updateLocale(newLocale)
+    }
+
+    currentLocale = Locale(currentLocale.languageCode);
 
     print('hundleLocaleCallback: New Locale: $currentLocale');
     return currentLocale;
@@ -44,6 +46,9 @@ class _TaleAppState extends State<TaleApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: Colors.white),
+    );
     return MaterialApp(
       title: 'Flutter Localisation Tale',
       theme: ThemeData(
@@ -52,7 +57,7 @@ class _TaleAppState extends State<TaleApp> {
       ),
       locale: currentLocale,
       supportedLocales: supportedLocalesList,
-      localeListResolutionCallback: hundleLocaleCallback,
+      //localeListResolutionCallback: hundleLocaleCallback,
       localizationsDelegates: [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -60,11 +65,12 @@ class _TaleAppState extends State<TaleApp> {
         TaleLocalizations.delegate,
       ],
       home: TaleHomePage(
-        onLocaleChange: onLocaleChange,
+        onLocaleChange: updateLocale,
       ),
     );
   }
 
   List<Locale> supportedLocalesList = kAppSupportedLanguageInfos
-      .map((localeInfo) => Locale(localeInfo['languageCode'])).toList();
+      .map((localeInfo) => Locale(localeInfo['languageCode']))
+      .toList();
 }
