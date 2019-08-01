@@ -4,25 +4,32 @@ import 'package:flutter/material.dart';
 
 import './tale_localizations.dart';
 import './TabViewPages/all_pages.dart';
+import './languages_page.dart';
 
 class TaleHomePage extends StatefulWidget {
   TaleHomePage({Key key, this.onLocaleChange}) : super(key: key);
 
   final Function onLocaleChange;
+
   _TaleHomePageState createState() => _TaleHomePageState();
 }
 
 class _TaleHomePageState extends State<TaleHomePage>
     with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  Random randomGenrator = Random();
+
   final List<Tab> _tabs = <Tab>[
     Tab(text: 'WidgetsLocalizations'),
     Tab(text: 'MaterialLocalizations'),
     Tab(text: 'CupertinoLocalizations'),
   ];
 
-  TabController _tabController;
-
-  Random _languageRandomGenerator;
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -31,25 +38,11 @@ class _TaleHomePageState extends State<TaleHomePage>
       length: _tabs.length,
       vsync: this,
     );
-
-    _languageRandomGenerator = Random();
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  void switchLanguage(BuildContext context) {
-    int langaugeIndex = _languageRandomGenerator
-        .nextInt(kAppSupportedLanguageInfos.length);
-    List<Locale> localesList = kAppSupportedLanguageInfos
-        .map((localeInfo) => Locale(localeInfo['languageCode']))
-        .toList();
-    print(localesList);
-
-    widget.onLocaleChange(localesList[langaugeIndex]);
+  void onGenerateRandomLanguage() {
+    int langaugIndex = randomGenrator.nextInt(kAppSupportedLanguageInfos.length);
+    widget.onLocaleChange(Locale(kAppSupportedLanguageInfos[langaugIndex]['languageCode']));
   }
 
   @override
@@ -69,18 +62,30 @@ class _TaleHomePageState extends State<TaleHomePage>
                 : EdgeInsets.only(left: 15),
             child: Text(
               '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).language}',
-              style: TextStyle(color: Colors.white30),
+              style: TextStyle(color: Colors.white30, fontSize: 18),
             ),
           ),
         ],
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
-            Icons.translate,
-            color: Theme.of(context).accentColor,
+          icon: Hero(
+            tag: '_',
+            child: Icon(
+              Icons.translate,
+              color: Theme.of(context).accentColor,
+            ),
           ),
           onPressed: () {
-            switchLanguage(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                fullscreenDialog: true,
+                builder: (_) => LanguagesPage(
+                  onLocaleChange: widget.onLocaleChange,
+                  onGenerateRandomLanguage: onGenerateRandomLanguage,
+                ),
+              ),
+            );
           },
         ),
         bottom: TabBar(
@@ -94,7 +99,7 @@ class _TaleHomePageState extends State<TaleHomePage>
           ),
           indicatorColor: Theme.of(context).primaryColor,
           unselectedLabelColor: Colors.white60,
-          unselectedLabelStyle: TextStyle(fontSize: 11),
+          unselectedLabelStyle: TextStyle(fontSize: 12),
           labelColor: Colors.black87,
         ),
       ),
@@ -103,7 +108,7 @@ class _TaleHomePageState extends State<TaleHomePage>
         children: [
           WidgetLocalizationsPage(),
           MaterialLocalizationsPage(),
-          CupertinoLocalizationsPage()
+          CupertinoLocalizationsPage(),
         ],
       ),
     );
