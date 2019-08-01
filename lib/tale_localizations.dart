@@ -12,60 +12,60 @@ class TaleLocalizations {
 
   static const Map<String, Map<String, String>> _loclizesValues = {
     "ar": {
-      "title": 'آهلاً بالعالم',
+      "title": 'مرحبا بالعالم',
     },
-    'bg': {"title": "Hello World"}, // Bulgarian
-    'bs': {"title": "Hello World"}, // Bosnian
-    'ca': {"title": "Hello World"}, // Catalan Valencian
-    'cs': {"title": "Hello World"}, // Czech
-    'da': {"title": "Hello World"}, // Danish
-    'de': {"title": "Hello World"}, // German
-    'el': {"title": "Hello World"}, // Modern Greek
+    'bg': {"title": "Здравей свят"}, // Bulgarian
+    'bs': {"title": "zdravo svijetu"}, // Bosnian
+    'ca': {"title": "Hola món"}, // Catalan Valencian
+    'cs': {"title": "Ahoj světe"}, // Czech
+    'da': {"title": "Hej Verden"}, // Danish
+    'de': {"title": "Hallo Welt"}, // German
+    'el': {"title": "Γειά σου Κόσμε"}, // Modern Greek
     'en': {"title": "Hello World"}, // English
-    'es': {"title": "Hello World"}, // Spanish Castilian
-    'et': {"title": "Hello World"}, // Estonian
-    'fa': {"title": "Hello World"}, // Persian
-    'fi': {"title": "Hello World"}, // Finnish
-    'fil': {"title": "Hello World"}, // Filipino Pilipino
-    'fr': {"title": "Hello World"}, // French
-    'gl': {"title": "Hello World"}, // Galician
-    'gsw': {"title": "Hello World"}, // Swiss German Alemannic Alsatian
-    'he': {"title": "Hello World"}, // Hebrew
-    'hi': {"title": "Hello World"}, // Hindi
-    'hr': {"title": "Hello World"}, // Croatian
-    'hu': {"title": "Hello World"}, // Hungarian
-    'hy': {"title": "Hello World"}, // Armenian
-    'id': {"title": "Hello World"}, // Indonesian
-    'it': {"title": "Hello World"}, // Italian
-    'ja': {"title": "Hello World"}, // Japanese
-    'kk': {"title": "Hello World"}, // Kazakh
-    'km': {"title": "Hello World"}, // Khmer Central Khmer
-    'ko': {"title": "Hello World"}, // Korean
-    'lt': {"title": "Hello World"}, // Lithuanian
-    'lv': {"title": "Hello World"}, // Latvian
-    'mn': {"title": "Hello World"}, // Mongolian
-    'mr': {"title": "Hello World"}, // Marathi
-    'ms': {"title": "Hello World"}, // Malay
-    'nb': {"title": "Hello World"}, // Norwegian Bokmål
-    'nl': {"title": "Hello World"}, // Dutch Flemish
-    'pl': {"title": "Hello World"}, // Polish
-    'ps': {"title": "Hello World"}, // Pushto Pashto
-    'pt': {"title": "Hello World"}, // Portuguese
-    'ro': {"title": "Hello World"}, // Romanian Moldavian Moldovan
-    'ru': {"title": "Hello World"}, // Russian
-    'sk': {"title": "Hello World"}, // Slovak
-    'sl': {"title": "Hello World"}, // Slovenian
-    'sr': {"title": "Hello World"}, // Serbian
-    'sv': {"title": "Hello World"}, // Swedish
-    'sw': {"title": "Hello World"}, // Swahili
-    'ta': {"title": "Hello World"}, // Tamil
-    'th': {"title": "Hello World"}, // Thai
-    'tl': {"title": "Hello World"}, // Tagalog
-    'tr': {"title": "Hello World"}, // Turkish
-    'uk': {"title": "Hello World"}, // Ukrainian
-    'ur': {"title": "Hello World"}, // Urdu
-    'vi': {"title": "Hello World"}, // Vietnamese
-    'zh': {"title": "Hello World"}, // Chinese
+    'es': {"title": "Hola Mundo"}, // Spanish Castilian
+    'et': {"title": "Tere, Maailm"}, // Estonian
+    'fa': {"title": "سلام دنیا"}, // Persian
+    'fi': {"title": "Hei maailma"}, // Finnish
+    'fil': {"title": "hello mundo"}, // Filipino Pilipino
+    'fr': {"title": "Bonjour le monde"}, // French
+    'gl': {"title": "Ola mundo"}, // Galician
+    'gsw': {"title": "Hallo Welt"}, // Swiss German Alemannic Alsatian
+    'he': {"title": "שלום עולם"}, // Hebrew
+    'hi': {"title": "नमस्ते दुनिया"}, // Hindi
+    'hr': {"title": "Pozdrav svijete"}, // Croatian
+    'hu': {"title": "Helló Világ"}, // Hungarian
+    'hy': {"title": "Բարեւ աշխարհ"}, // Armenian
+    'id': {"title": "Halo Dunia"}, // Indonesian
+    'it': {"title": "Ciao mondo"}, // Italian
+    'ja': {"title": "こんにちは世界"}, // Japanese
+    'kk': {"title": "Сәлем Әлем"}, // Kazakh
+    'km': {"title": "សួស្តី​ពិភពលោក"}, // Khmer Central Khmer
+    'ko': {"title": "안녕 세상"}, // Korean
+    'lt': {"title": "Labas pasauli"}, // Lithuanian
+    'lv': {"title": "Sveika pasaule"}, // Latvian
+    'mn': {"title": "сайн уу ертөнц"}, // Mongolian
+    'mr': {"title": "हॅलो वर्ल्ड"}, // Marathi
+    'ms': {"title": "Hai dunia"}, // Malay
+    'nb': {"title": "Hei Verden"}, // Norwegian Bokmål
+    'nl': {"title": "Hallo Wereld"}, // Dutch Flemish
+    'pl': {"title": "Witaj świecie"}, // Polish
+    'ps': {"title": "سلام نړی"}, // Pushto Pashto
+    'pt': {"title": "Olá Mundo"}, // Portuguese
+    'ro': {"title": "Salut Lume"}, // Romanian Moldavian Moldovan
+    'ru': {"title": "Привет, мир"}, // Russian
+    'sk': {"title": "ahoj svet"}, // Slovak
+    'sl': {"title": "Pozdravljen, svet"}, // Slovenian
+    'sr': {"title": "Здраво Свете"}, // Serbian
+    'sv': {"title": "Hej världen"}, // Swedish
+    'sw': {"title": "Salamu, Dunia"}, // Swahili
+    'ta': {"title": "ஹலோ உலகம்"}, // Tamil
+    'th': {"title": "สวัสดีชาวโลก"}, // Thai
+    'tl': {"title": "Салом Ҷаҳон"}, // Tagalog
+    'tr': {"title": "Selam Dünya"}, // Turkish
+    'uk': {"title": "Привіт Світ"}, // Ukrainian
+    'ur': {"title": "ہیلو دنیا"}, // Urdu
+    'vi': {"title": "Chào thế giới"}, // Vietnamese
+    'zh': {"title": "你好，世界"}, // Chinese
   };
 
   String get title => _loclizesValues[locale.languageCode]['title'];
