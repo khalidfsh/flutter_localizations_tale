@@ -16,14 +16,16 @@ class TaleHomePage extends StatefulWidget {
 
 class _TaleHomePageState extends State<TaleHomePage>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
   Random randomGenrator = Random();
 
-  final List<Tab> _tabs = <Tab>[
+  static const _tabs = <Tab>[
     Tab(text: 'WidgetsLocalizations'),
     Tab(text: 'MaterialLocalizations'),
     Tab(text: 'CupertinoLocalizations'),
   ];
+
+
+  TabController _tabController;
 
   @override
   void dispose() {
@@ -41,66 +43,65 @@ class _TaleHomePageState extends State<TaleHomePage>
   }
 
   void onGenerateRandomLanguage() {
-    int langaugIndex = randomGenrator.nextInt(kAppSupportedLanguageInfos.length);
-    widget.onLocaleChange(Locale(kAppSupportedLanguageInfos[langaugIndex]['languageCode']));
+    int langaugIndex =
+        randomGenrator.nextInt(kAppSupportedLanguageInfos.length);
+    widget.onLocaleChange(
+        Locale(kAppSupportedLanguageInfos[langaugIndex]['languageCode']));
+  }
+
+  Widget bulidLanguageNameLable() {
+    TextDirection _direction = WidgetsLocalizations.of(context).textDirection;
+    return Padding(
+      padding: _direction == TextDirection.ltr
+          ? EdgeInsets.only(right: 15)
+          : EdgeInsets.only(left: 15),
+      child: Text(
+        '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).language}',
+      ),
+    );
+  }
+
+  Widget buildLangaugeSwitcherButton() {
+    return IconButton(
+      icon: Hero(
+        tag: '_',
+        child: Icon(
+          Icons.translate,
+        ),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (_) => LanguagesPage(
+              onLocaleChange: widget.onLocaleChange,
+              onGenerateRandomLanguage: onGenerateRandomLanguage,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).title}   🌍',
-          style: TextStyle(color: Theme.of(context).accentColor),
-        ),
+        leading: buildLangaugeSwitcherButton(),
+        title: Text('🌍  ${TaleLocalizations.of(context).title}'),
         centerTitle: false,
-        actions: <Widget>[
-          Padding(
-            padding: (WidgetsLocalizations.of(context).textDirection ==
-                    TextDirection.ltr)
-                ? EdgeInsets.only(right: 15)
-                : EdgeInsets.only(left: 15),
-            child: Text(
-              '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).language}',
-              style: TextStyle(color: Colors.white30, fontSize: 18),
-            ),
-          ),
-        ],
-        elevation: 0,
-        leading: IconButton(
-          icon: Hero(
-            tag: '_',
-            child: Icon(
-              Icons.translate,
-              color: Theme.of(context).accentColor,
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (_) => LanguagesPage(
-                  onLocaleChange: widget.onLocaleChange,
-                  onGenerateRandomLanguage: onGenerateRandomLanguage,
-                ),
-              ),
-            );
-          },
-        ),
+        actions: <Widget>[bulidLanguageNameLable()],
+        elevation: 5,
         bottom: TabBar(
           tabs: _tabs,
           controller: _tabController,
+          indicatorWeight: 2,
           isScrollable: true,
-          indicator: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            color: Color.fromRGBO(229, 229, 229, 1),
-          ),
-          indicatorColor: Theme.of(context).primaryColor,
-          unselectedLabelColor: Colors.white60,
-          unselectedLabelStyle: TextStyle(fontSize: 12),
-          labelColor: Colors.black87,
+          indicatorPadding: EdgeInsets.symmetric(horizontal: 100),
+          indicatorColor: Colors.black,
+          unselectedLabelColor: Colors.black54,
+          unselectedLabelStyle: TextStyle(fontSize: 10),
         ),
       ),
       body: TabBarView(

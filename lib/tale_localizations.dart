@@ -1,19 +1,29 @@
-import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/material.dart';
-//import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/foundation.dart' show SynchronousFuture;
 
+/// Class to establish localized resource values as we need in our app.
+///
+/// This class supports locales with the following [Locale.languageCode]s
+/// in list available programatically via [kMaterialSupportedLanguages].
 class TaleLocalizations {
   const TaleLocalizations(this.locale) : assert(locale != null);
 
+  /// A [LocalizationsDelegate] that uses [TaleLocalizations.load]
+  /// to create an instance of this class.
+  static const LocalizationsDelegate<TaleLocalizations> delegate =
+      _TaleLocalizationsDelegate();
+
+
+  /// The locale for which the values of this class's localized resources
+  /// have been translated.
   final Locale locale;
 
-  static TaleLocalizations of(BuildContext context) =>
-      Localizations.of<TaleLocalizations>(context, TaleLocalizations);
 
+  /// All localized values should be provided here,
+  /// it's simple in our example to understand the core localization
+  /// benefit in Flutter, if you have more value use [intel] package.
   static const Map<String, Map<String, String>> _loclizesValues = {
-    "ar": {
-      "title": 'مرحبا بالعالم',
-    },
+    "ar": {"title": 'مرحبا بالعالم'}, // Arabic
     'bg': {"title": "Здравей свят"}, // Bulgarian
     'bs': {"title": "zdravo svijetu"}, // Bosnian
     'ca': {"title": "Hola món"}, // Catalan Valencian
@@ -68,15 +78,26 @@ class TaleLocalizations {
     'zh': {"title": "你好，世界"}, // Chinese
   };
 
+  static TaleLocalizations of(BuildContext context) =>
+      Localizations.of<TaleLocalizations>(context, TaleLocalizations);
+
+  /// Getter to get title as [locale.languageCode] wants.
   String get title => _loclizesValues[locale.languageCode]['title'];
 
+  /// Getter for language name from our supported language list [kAppSupportedLanguageInfos]
   String get language => kAppSupportedLanguageInfos
       .singleWhere((t) => t['languageCode'] == locale.languageCode)['language'];
 
-  static const LocalizationsDelegate<TaleLocalizations> delegate =
-      _TaleLocalizationsDelegate();
+  /// Creates an object that provides localized resource values for the
+  /// lowest levels of the Flutter framework.
+  ///
+  /// This method used to create a [LocalizationsDelegate].
+  /// The [MaterialApp] does so by default in our case.
+  static Future<TaleLocalizations> load(Locale locale) =>
+      SynchronousFuture<TaleLocalizations>(TaleLocalizations(locale));
 }
 
+/// Custom localizations delegate.
 class _TaleLocalizationsDelegate
     extends LocalizationsDelegate<TaleLocalizations> {
   const _TaleLocalizationsDelegate();
@@ -88,13 +109,15 @@ class _TaleLocalizationsDelegate
 
   @override
   Future<TaleLocalizations> load(Locale locale) =>
-      SynchronousFuture<TaleLocalizations>(TaleLocalizations(locale));
+      TaleLocalizations.load(locale);
 
   @override
   bool shouldReload(LocalizationsDelegate<TaleLocalizations> old) => false;
 }
 
-final List<Map<String, String>> kAppSupportedLanguageInfos = const [
+/// Const list of maps contain supported language for or app,
+/// conrain all languges names in the same language and its code.
+const List<Map<String, String>> kAppSupportedLanguageInfos = const [
   {"language": "العربية", "languageCode": "ar"},
   {"language": "Bulgarian", "languageCode": "bg"},
   {"language": "Bosnian", "languageCode": "bs"},

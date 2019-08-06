@@ -1,36 +1,60 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import './tale_localizations.dart';
 
 class LanguagesPage extends StatelessWidget {
-  const LanguagesPage({Key key, this.onLocaleChange, this.onGenerateRandomLanguage})
+  const LanguagesPage(
+      {Key key, this.onLocaleChange, this.onGenerateRandomLanguage})
       : super(key: key);
 
-  final Function onLocaleChange;
   final Function onGenerateRandomLanguage;
-
-  // Function generateRandomLanguage() {
-  //   //int randomLangaugeIndex = randomGenrator.nextInt(kAppSupportedLanguageInfos.length);
-  //   return onLocaleChange(Locale(kAppSupportedLanguageInfos[0]['LanguageCode']));
-
-  // }
+  final Function onLocaleChange;
 
   void changeLanguage(String languageCode) {
     return onLocaleChange(Locale(languageCode));
   }
 
+  Widget buildLanguagButton(BuildContext context, int index) {
+    String _currentLanguageCode = Localizations.localeOf(context).languageCode;
+    
+    return RaisedButton(
+      color: (_currentLanguageCode ==
+              kAppSupportedLanguageInfos[index]['languageCode'])
+          ? Colors.green.shade500
+          : Theme.of(context).primaryColor,
+      child: Center(
+        child: Text(
+          kAppSupportedLanguageInfos[index]['language'],
+        ),
+      ),
+      onPressed: () {
+        changeLanguage(kAppSupportedLanguageInfos[index]['languageCode']);
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  Widget buildLanguagesButtonsGrid() {
+    return GridView.builder(
+      padding: EdgeInsets.all(10),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 3,
+        mainAxisSpacing: 15,
+        crossAxisSpacing: 15,
+        crossAxisCount: 2,
+      ),
+      itemCount: kAppSupportedLanguageInfos.length,
+      itemBuilder: buildLanguagButton,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).accentColor,
         title: Hero(
           tag: '_',
           child: Icon(
             Icons.translate,
-            color: Theme.of(context).primaryColor,
             size: 38,
           ),
         ),
@@ -38,7 +62,6 @@ class LanguagesPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.close,
-            color: Theme.of(context).primaryColor,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -48,8 +71,7 @@ class LanguagesPage extends StatelessWidget {
           FlatButton(
             child: Text(
               'Random',
-              style: TextStyle(
-                  fontSize: 18, color: Theme.of(context).primaryColor),
+              style: TextStyle(fontSize: 18),
             ),
             onPressed: () {
               onGenerateRandomLanguage();
@@ -58,30 +80,7 @@ class LanguagesPage extends StatelessWidget {
           )
         ],
       ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(10),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 2.5,
-          mainAxisSpacing: 15,
-          crossAxisSpacing: 15,
-          crossAxisCount: 2,
-        ),
-        itemCount: kAppSupportedLanguageInfos.length,
-        itemBuilder: (context, i) => RaisedButton(
-            materialTapTargetSize: MaterialTapTargetSize.padded,
-            color:
-                (true) ? Theme.of(context).primaryColor : Colors.green.shade500,
-            child: Center(
-              child: Text(
-                kAppSupportedLanguageInfos[i]['language'],
-                style: TextStyle(color: Colors.white70),
-              ),
-            ),
-            onPressed: () {
-              changeLanguage(kAppSupportedLanguageInfos[i]['languageCode']);
-              Navigator.pop(context);
-            }),
-      ),
+      body: buildLanguagesButtonsGrid(),
     );
   }
 }

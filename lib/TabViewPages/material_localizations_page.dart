@@ -3,166 +3,140 @@ import 'package:flutter/material.dart';
 import '../Widget/locale_info_tile.dart';
 
 class MaterialLocalizationsPage extends StatelessWidget {
-  const MaterialLocalizationsPage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var localeList = _materialLocalizationsProperties(context);
-    return Container(
-      padding: EdgeInsets.only(top: 3),
-      color: Color.fromRGBO(229, 229, 229, 1),
-      child: ListView.builder(
-          itemCount: localeList.length,
-          itemBuilder: (context, i) {
-            return buildListTile(localeList[i], i);
-          }),
+    return ListView.builder(
+      padding: EdgeInsets.all(5),
+      itemCount: localeList.length,
+      itemBuilder: (context, i) {
+        return LocalInfoTile(
+          indicator: localeList[i]['indicator'],
+          value: localeList[i]['value'],
+          type: localeList[i]['type'],
+        );
+      },
     );
   }
 
-  Widget buildListTile(Map<String, String> materialPropertie, int index) {
-    return (index == 0)
-        ? Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    'The localized resource values used by the Material widgets:',
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(fontSize: 14, color: Colors.black54)),
-              ),
-              LocalInfoTile(
-                title: materialPropertie['title'],
-                content: materialPropertie['value'],
-                type: materialPropertie['type'],
-              ),
-            ],
-          )
-        : LocalInfoTile(
-            title: materialPropertie['title'],
-            content: materialPropertie['value'],
-            type: materialPropertie['type'],
-          );
-  }
-
-  List<Map<String, String>> _materialLocalizationsProperties(
+  List<Map<String, dynamic>> _materialLocalizationsProperties(
       BuildContext context) {
     return [
       {
         'type': 'Lable',
-        'title': 'alertDialogLabel',
+        'indicator': 'alertDialogLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .alertDialogLabel
       },
       {
         'type': 'Lable',
-        'title': 'anteMeridiemAbbreviation',
+        'indicator': 'anteMeridiemAbbreviation',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .anteMeridiemAbbreviation
       },
       {
         'type': 'Tooltip',
-        'title': 'backButtonTooltip',
+        'indicator': 'backButtonTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .backButtonTooltip
       },
       {
         'type': 'Lable',
-        'title': 'cancelButtonLabel',
+        'indicator': 'cancelButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .cancelButtonLabel
       },
       {
         'type': 'Lable',
-        'title': 'closeButtonLabel',
+        'indicator': 'closeButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .closeButtonLabel
       },
       {
         'type': 'Tooltip',
-        'title': 'closeButtonTooltip',
+        'indicator': 'closeButtonTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .closeButtonTooltip
       },
       {
         'type': 'Hint',
-        'title': 'collapsedIconTapHint',
+        'indicator': 'collapsedIconTapHint',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .collapsedIconTapHint
       },
       {
         'type': 'Lable',
-        'title': 'continueButtonLabel',
+        'indicator': 'continueButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .continueButtonLabel
       },
       {
         'type': 'Lable',
-        'title': 'copyButtonLabel',
+        'indicator': 'copyButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .copyButtonLabel
       },
       {
         'type': 'Lable',
-        'title': 'cutButtonLabel',
+        'indicator': 'cutButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .cutButtonLabel
       },
       {
         'type': 'Tooltip',
-        'title': 'deleteButtonTooltip',
+        'indicator': 'deleteButtonTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .deleteButtonTooltip
       },
       {
         'type': 'Lable',
-        'title': 'dialogLabel',
+        'indicator': 'dialogLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .dialogLabel
       },
       {
         'type': 'Lable',
-        'title': 'drawerLabel',
+        'indicator': 'drawerLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .drawerLabel
       },
       {
         'type': 'Hint',
-        'title': 'expandedIconTapHint',
+        'indicator': 'expandedIconTapHint',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .expandedIconTapHint
       },
       {
         'type': 'Time',
-        'title': 'firstDayOfWeekIndex',
+        'indicator': 'firstDayOfWeekIndex',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .firstDayOfWeekIndex
-            .toString()
       },
       {
         'type': 'Numbers',
-        'title': 'formatDecimal',
+        'indicator': 'formatDecimal',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatDecimal(1000000)
       },
       {
         'type': 'Time',
-        'title': 'formatFullDate',
+        'indicator': 'formatFullDate',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             //TODO: Replace with realtime DateTime
@@ -170,254 +144,252 @@ class MaterialLocalizationsPage extends StatelessWidget {
       },
       {
         'type': 'Time',
-        'title': 'formatHour',
+        'indicator': 'formatHour',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatHour(TimeOfDay(hour: 12, minute: 29))
       },
       {
         'type': 'Time',
-        'title': 'formatMediumDate',
+        'indicator': 'formatMediumDate',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatMediumDate(DateTime(2249, 7, 19, 23, 59, 59))
       },
       {
         'type': 'Time',
-        'title': 'formatMinute',
+        'indicator': 'formatMinute',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatMinute(TimeOfDay(hour: 15, minute: 30))
       },
       {
         'type': 'Time',
-        'title': 'formatMonthYear',
+        'indicator': 'formatMonthYear',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatMonthYear(DateTime(2249, 7, 19, 23, 59, 59))
       },
       {
         'type': 'Time',
-        'title': 'formatTimeOfDay',
+        'indicator': 'formatTimeOfDay',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatTimeOfDay(TimeOfDay(hour: 15, minute: 30))
       },
       {
         'type': 'Time',
-        'title': 'formatYear',
+        'indicator': 'formatYear',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .formatYear(DateTime(2249, 7, 19, 23, 59, 59))
       },
       {
         'type': 'Lable',
-        'title': 'hideAccountsLabel',
+        'indicator': 'hideAccountsLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .hideAccountsLabel
       },
       {
         'type': 'Lable',
-        'title': 'licensesPageTitle',
+        'indicator': 'licensesPageindicator',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .licensesPageTitle
       },
       {
         'type': 'Lable',
-        'title': 'modalBarrierDismissLabel',
+        'indicator': 'modalBarrierDismissLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .modalBarrierDismissLabel
       },
       {
         'type': 'Time',
-        'title': 'narrowWeekdays',
+        'indicator': 'narrowWeekdays',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .narrowWeekdays
-            .toString()
       },
       {
         'type': 'Tooltip',
-        'title': 'nextMonthTooltip',
+        'indicator': 'nextMonthTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .nextMonthTooltip
       },
       {
         'type': 'Tooltip',
-        'title': 'nextPageTooltip',
+        'indicator': 'nextPageTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .nextPageTooltip
       },
       {
         'type': 'Lable',
-        'title': 'okButtonLabel',
+        'indicator': 'okButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .okButtonLabel
       },
       {
         'type': 'Tooltip',
-        'title': 'openAppDrawerTooltip',
+        'indicator': 'openAppDrawerTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .openAppDrawerTooltip
       },
       {
         'type': 'Lable',
-        'title': 'pasteButtonLabel',
+        'indicator': 'pasteButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .pasteButtonLabel
       },
       {
         'type': 'Lable',
-        'title': 'popupMenuLabel',
+        'indicator': 'popupMenuLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .popupMenuLabel
       },
       {
         'type': 'Lable',
-        'title': 'postMeridiemAbbreviation',
+        'indicator': 'postMeridiemAbbreviation',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .postMeridiemAbbreviation
       },
       {
         'type': 'Tooltip',
-        'title': 'previousMonthTooltip',
+        'indicator': 'previousMonthTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .previousMonthTooltip
       },
       {
         'type': 'Tooltip',
-        'title': 'previousPageTooltip',
+        'indicator': 'previousPageTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .previousPageTooltip
       },
       {
         'type': 'Lable',
-        'title': 'refreshIndicatorSemanticLabel',
+        'indicator': 'refreshIndicatorSemanticLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .refreshIndicatorSemanticLabel
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemDown',
+        'indicator': 'reorderItemDown',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemDown
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemLeft',
+        'indicator': 'reorderItemLeft',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemLeft
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemRight',
+        'indicator': 'reorderItemRight',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemRight
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemToEnd',
+        'indicator': 'reorderItemToEnd',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemToEnd
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemToStart',
+        'indicator': 'reorderItemToStart',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemToStart
       },
       {
         'type': 'Arrange',
-        'title': 'reorderItemUp',
+        'indicator': 'reorderItemUp',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .reorderItemUp
       },
       {
         'type': 'Arrange',
-        'title': 'rowsPerPageTitle',
+        'indicator': 'rowsPerPageindicator',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .rowsPerPageTitle
       },
       {
         'type': 'Arrange',
-        'title': 'scriptCategory',
+        'indicator': 'scriptCategory',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .scriptCategory
-            .toString()
       },
       {
         'type': 'Lable',
-        'title': 'searchFieldLabel',
+        'indicator': 'searchFieldLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .searchFieldLabel
       },
       {
         'type': 'Lable',
-        'title': 'selectAllButtonLabel',
+        'indicator': 'selectAllButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .selectAllButtonLabel
       },
       {
         'type': 'Lable',
-        'title': 'showAccountsLabel',
+        'indicator': 'showAccountsLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .showAccountsLabel
       },
       {
         'type': 'Tooltip',
-        'title': 'showMenuTooltip',
+        'indicator': 'showMenuTooltip',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .showMenuTooltip
       },
       {
         'type': 'Lable',
-        'title': 'signedInLabel',
+        'indicator': 'signedInLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .signedInLabel
       },
       {
         'type': 'Time',
-        'title': 'timePickerHourModeAnnouncement',
+        'indicator': 'timePickerHourModeAnnouncement',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .timePickerHourModeAnnouncement
       },
       {
         'type': 'Time',
-        'title': 'timePickerMinuteModeAnnouncement',
+        'indicator': 'timePickerMinuteModeAnnouncement',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .timePickerMinuteModeAnnouncement
       },
       {
         'type': 'Lable',
-        'title': 'viewLicensesButtonLabel',
+        'indicator': 'viewLicensesButtonLabel',
         'value': Localizations.of<MaterialLocalizations>(
                 context, MaterialLocalizations)
             .viewLicensesButtonLabel
