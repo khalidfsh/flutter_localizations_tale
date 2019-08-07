@@ -44,20 +44,27 @@ class _TaleAppState extends State<TaleApp> {
       /// Supported locales we want to support in our app.
       supportedLocales: supportedLocalesList,
 
-      /// Callback provided by MaterialApp widget to retrive.
-      /// a list of prefered Locales(&languages)
-      // localeListResolutionCallback: (deviceLocales, suportedLocales) {
-      //   print('Device Locales: $deviceLocales');
-      //   print('App Supported Locales: $suportedLocales');
-      //   return deviceLocales[0] ?? Locale('ar');
-      // },
+      /// Callback provided by MaterialApp widget to retrive
+      /// a list of prefered Locales(&languages).
+      localeListResolutionCallback: (deviceLocales, suportedLocales) {
+        print('Device Locales: $deviceLocales');
+        print('App Supported Locales: $suportedLocales');
+        
+        for (Locale deviceLocale in deviceLocales)
+          return suportedLocales.firstWhere((suportedLocale) =>
+              deviceLocale.languageCode == suportedLocale.languageCode);
+        //return defult locale if not supported locale.
+        return suportedLocales.first;
+      },
 
       /// Callback provided by MaterialApp widget to retrive
       /// the first prefered Locale(&language).
       // localeResolutionCallback: (deviceLocale, suportedLocales) {
       //   print('Device Locale: $deviceLocale');
       //   print('App Supported Locales: $suportedLocales');
-      //   return deviceLocale ?? Locale('ar');
+      //   return suportedLocales.firstWhere((suportedLocale) =>
+      //           deviceLocale.languageCode == suportedLocale.languageCode) ??
+      //       suportedLocales.first;
       // },
 
       /// List of localizations delegates we want to adopt in our app,
@@ -66,12 +73,14 @@ class _TaleAppState extends State<TaleApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+
         /// Our custom localizations delegate,
         /// see [TaleLocalizations.delegate] & [_TaleLocalizationsDelegate] for more info.
         TaleLocalizations.delegate,
       ],
-      
+
       home: TaleHomePage(onLocaleChange: updateLocale),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
