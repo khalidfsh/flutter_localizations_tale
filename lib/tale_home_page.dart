@@ -53,8 +53,8 @@ class _TaleHomePageState extends State<TaleHomePage>
     TextDirection _direction = WidgetsLocalizations.of(context).textDirection;
     return Padding(
       padding: _direction == TextDirection.ltr
-          ? EdgeInsets.only(right: 15)
-          : EdgeInsets.only(left: 15),
+          ? EdgeInsets.only(top: 10, right: 15)
+          : EdgeInsets.only(top: 10, left: 15),
       child: Text(
         '${Localizations.of<TaleLocalizations>(context, TaleLocalizations).language}',
       ),
