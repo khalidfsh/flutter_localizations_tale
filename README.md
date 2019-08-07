@@ -13,15 +13,17 @@ flutter run
 
 ## Screenshots
 
-<img src=""/> <img src=""/>
+<img src="screenshots/home.png" height='600'/> <img src="screenshots/languages.png" height='600'/>
 
 ## Overview
 As every Dart project [`main.dart`](lib/main.dart) is the starting point of app.
 
-Next we'll have an entery page [`tale_home_page.dart`](lib/tale_home_page.dart) containing an app bar and a tab bar:
+Next we'll have an entry page [`tale_home_page.dart`](lib/tale_home_page.dart) containing an app bar and a tab bar:
 1. [`widget_localizations_page.dart`](lib/TabViewPages/widget_localizations_page.dart): show pref info about this delegate which provided by flutter to localized widget directionality.
 2. [`material_localizations_page.dart`](lib/TabViewPages/material_localizations_page.dart): shows all material localized value, usually used behind the scene by Material components, and can be accessed anywhere in widgets tree. 
-3. [`cupertino_localizations_page.dart`](lib/TabViewPages/cupertino_localizations_page.dart): as material but for ios components (cupertino), and also can be accessed anywhere in widgets tree. 
+3. [`cupertino_localizations_page.dart`](lib/TabViewPages/cupertino_localizations_page.dart): as material but for ios components (cupertino), and also can be accessed anywhere in widgets tree.
+
+Finally the core concept of the project is in [**tale_localizations.dart**](lib/tale_localizations.dart) file which holds every localizations logic in the app.
 
 
 ## Supported Languages
@@ -79,13 +81,13 @@ Next we'll have an entery page [`tale_home_page.dart`](lib/tale_home_page.dart) 
 - Vietnamese
 - Chinese
 
-## Built with ❤️ using [**Flutter**](https://flutter.dev) & **flutter_localizations**
+## Built with ❤️ using [**dart**](https://dart.dev), [**flutter**](https://flutter.dev) & [**flutter_localizations**]().
 
 ### Show some ❤️, share and star the repo to support the project.
 
 ### Created & Maintained By
-[Khalid F.Sh](https://github.com/khalidfsh) - [Email](dev.khalid@me.com)
+[Khalid F.Shuhail](https://github.com/khalidfsh) - [Email.](dev.khalid@me.com)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
